@@ -1,0 +1,71 @@
+# =========================
+# ROS 2 / Colcon build
+# =========================
+build/
+install/
+log/
+
+# Colcon metadata
+.colcon/
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Python virtual environments
+venv/
+.env/
+.venv/
+
+# =========================
+# C++ / Compiled
+# =========================
+*.o
+*.so
+*.a
+*.out
+
+# =========================
+# IDE / Editor files
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# ROS-specific
+# =========================
+*.log
+*.bag
+*.db3
+
+# ROS 2 launch logs
+ros2bag/
+rosbag2_*/
+
+# =========================
+# Test / coverage
+# =========================
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# =========================
+# Misc
+# =========================
+*.bak
+*.tmp
