@@ -43,6 +43,12 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'false'}.items()
     )
 
+    cam = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory(package_name),'launch','pi_cam.launch.py'
+            )])
+    )
+
     twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
     twist_mux = Node(
             package="twist_mux",
@@ -96,6 +102,13 @@ def generate_launch_description():
         )
     )
 
+    delayed_cam = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[cam],
+        )
+    )
+
 
     # diff_drive_spawner = Node(
     #     package="controller_manager",
@@ -141,6 +154,7 @@ def generate_launch_description():
         twist_mux,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
-        delayed_joint_broad_spawner
+        delayed_joint_broad_spawner,
+        delayed_cam
 
     ])
