@@ -54,7 +54,8 @@ def generate_launch_description():
     default_world = os.path.join(
         get_package_share_directory(package_name),
         'worlds',
-        'obstacles.world'
+        'warehouse.sdf'
+        # 'obstacles.world'
         )    
     
     world = LaunchConfiguration('world')
@@ -129,6 +130,16 @@ def generate_launch_description():
         arguments=["/camera/image_raw"]
     )
 
+    rviz_params = os.path.join(get_package_share_directory(package_name),'rviz','config.rviz')
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', rviz_params],
+    )
+
+
 
 
     # Code for delaying a node (I haven't tested how effective it is)
@@ -160,5 +171,6 @@ def generate_launch_description():
         diff_drive_spawner,
         joint_broad_spawner,
         ros_gz_bridge,
-        ros_gz_image_bridge
+        ros_gz_image_bridge,
+        rviz_node
     ])
