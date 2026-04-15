@@ -8,7 +8,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'serial_port',
-            default_value='/dev/ttyUSB0',
+            default_value='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0',
             description='Serial port for the RPLidar'
         ),
         Node(
