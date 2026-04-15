@@ -35,7 +35,7 @@ def generate_launch_description():
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('nav2_bringup'),'launch','navigation_launch.py'
-        )]), launch_arguments={'params_file': nav2_params,'use_sim_time': 'true'}.items()
+        )]), launch_arguments={'params_file': nav2_params,'use_sim_time': use_sim_time}.items()
     )
 
 
@@ -43,7 +43,7 @@ def generate_launch_description():
     slam = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory('slam_toolbox'),'launch','online_async_launch.py'
-        )]), launch_arguments={'params_file': slam_params,'use_sim_time': 'true'}.items()
+        )]), launch_arguments={'params_file': slam_params,'use_sim_time': use_sim_time}.items()
     )
 
     return LaunchDescription([
@@ -51,6 +51,7 @@ def generate_launch_description():
             'use_sim_time',
             default_value='false',
             description='Use sim time if true'),
-        slam,
-        nav2       
+        
+        nav2,
+        slam
     ])
