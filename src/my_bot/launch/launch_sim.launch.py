@@ -130,7 +130,7 @@ def generate_launch_description():
         arguments=["/camera/image_raw"]
     )
 
-    rviz_params = os.path.join(get_package_share_directory(package_name),'rviz','config.rviz')
+    rviz_params = os.path.join(get_package_share_directory(package_name),'rviz','nav_config_sim.rviz')
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -158,7 +158,27 @@ def generate_launch_description():
     #
     # Replace the diff_drive_spawner in the final return with delayed_diff_drive_spawner
 
+    # nav2_params = os.path.join(get_package_share_directory(package_name),'config','nav2_params.yaml')
+    # nav2 = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([os.path.join(
+    #         get_package_share_directory('nav2_bringup'),'launch','navigation_launch.py'
+    #     )]), launch_arguments={'params_file': nav2_params,'use_sim_time': 'true'}.items()
+    # )
 
+
+    # slam_params = os.path.join(get_package_share_directory(package_name),'config','mapper_params_online_async.yaml')
+    # slam = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([os.path.join(
+    #         get_package_share_directory('slam_toolbox'),'launch','online_async_launch.py'
+    #     )]), launch_arguments={'params_file': slam_params,'use_sim_time': 'true'}.items()
+    # )
+
+
+    navigation = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([os.path.join(
+            get_package_share_directory(package_name),'launch','navigation.launch.py'
+        )]), launch_arguments={'use_sim_time': 'true'}.items()
+    )
 
     # Launch them all!
     return LaunchDescription([
@@ -172,5 +192,8 @@ def generate_launch_description():
         joint_broad_spawner,
         ros_gz_bridge,
         ros_gz_image_bridge,
-        rviz_node
+        rviz_node,
+        navigation
+        # nav2,
+        # slam
     ])
